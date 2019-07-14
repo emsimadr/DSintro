@@ -7,26 +7,23 @@ df = (pd.read_excel(path + 'Energy Indicators.xls',
     skiprows=18,
     skipfooter=38,
     usecols = [2,3,4,5],
-    names = ['Country', 'Energy Supply', 'Energy Supply per Capita', '% Renewable']))
+    names = ['Country', 'Energy Supply', 'Energy Supply per Capita', '% Renewable'],
+    na_values = ['...']))
 
 # Convert Energy Supply to Gigajoules
 df['Energy Supply'] = df['Energy Supply']*1000000
-df.replace('...', np.NaN)
 
-# for col in df.columns:
-#     if col[:2]=='01':
-#         df.rename(columns={col:'Gold'+col[4:]}, inplace=True)
-#     if col[:2]=='02':
-#         df.rename(columns={col:'Silver'+col[4:]}, inplace=True)
-#     if col[:2]=='03':
-#         df.rename(columns={col:'Bronze'+col[4:]}, inplace=True)
-#     if col[:1]=='№':
-#         df.rename(columns={col:'#'+col[1:]}, inplace=True)
-#
-# names_ids = df.index.str.split('\s\(') # split the index by '('
-#
-# df.index = names_ids.str[0] # the [0] element is the country name (new index)
-# df['ID'] = names_ids.str[1].str[:3] # the [1] element is the abbreviation or ID (take first 3 characters from that)
-#
-# df = df.drop('Totals')
-df.head()
+# Remove numbers from country name
+df['Country'] = df['Country'].str.replace('\d+', '')
+
+# Renaming Countris
+df['Country'] = df['Country'].replace({
+    "Republic of Korea" : "South Korea",
+    "United States of America" : "United States",
+    "United Kingdom of Great Britain and Northern Ireland" : "United Kingdom",
+    "China, Hong Kong Special Administrative Region" : "Hong Kong",
+    "Bolivia (Plurinational State of)" : "Bolivia",
+    "Venezuela (Bolivarian Republic of)" : "Venezuela"
+})
+
+print(df)
