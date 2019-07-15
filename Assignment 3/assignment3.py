@@ -65,7 +65,7 @@ def answer_one():
 # Answer Two
 def answer_two():
     max_row_count = np.amin([Energy.shape[0], GDP.shape[0], ScimEn.shape[0]])
-    return max_row_count - 15
+    return int(max_row_count - 15)
 answer_two()
 
 # %%
@@ -82,7 +82,6 @@ def answer_four():
     AvgGDP = answer_three()
     Top15 = answer_one()
     return Top15.loc[AvgGDP.index[5]]['2015'] - Top15.loc[AvgGDP.index[5]]['2006']
-
 answer_four()
 
 # %%
