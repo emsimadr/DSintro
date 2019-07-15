@@ -121,6 +121,10 @@ answer_eight()
 # %%
 # Answer Nine
 def answer_nine():
+    Top15 = answer_one()
+    Top15['Population'] = Top15['Energy Supply'] / Top15['Energy Supply per Capita']
+    Top15['Citable Documents per Capita'] = Top15['Citable documents'] / Top15['Population']
+    return Top15[['Citable Documents per Capita','Energy Supply per Capita']].corr(method='pearson').iloc[0,1]
 
 answer_nine()
 
