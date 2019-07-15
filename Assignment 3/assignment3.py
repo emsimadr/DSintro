@@ -93,6 +93,11 @@ answer_five()
 
 # %%
 # Answer Six
+def answer_six():
+    Top15 = answer_one()
+    top_renewable = Top15[Top15['% Renewable'] == Top15['% Renewable'].max()]
+    return (top_renewable.index[0], top_renewable['% Renewable'])
+answer_six()
 
 # %%
 # Answer Seven
