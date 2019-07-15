@@ -55,18 +55,26 @@ def answer_one():
     tmp_GDP = GDP[['Country', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015']]
 
     # Intersections between all three data frames
-    top15 = pd.merge(pd.merge(tmp_scim, Energy, left_on='Country', right_on='Country',  how='inner'),
+    Top15 = pd.merge(pd.merge(tmp_scim, Energy, left_on='Country', right_on='Country',  how='inner'),
         tmp_GDP, left_on='Country', right_on='Country', how='inner')
     # Set index on Country
-    top15.set_index('Country',inplace=True)
-    return top15
+    Top15.set_index('Country',inplace=True)
+    return Top15
 
 # %%
 # Answer Two
-def answer
+def answer_two():
+    max_row_count = np.amin([Energy.shape[0], GDP.shape[0], ScimEn.shape[0]])
+    return max_row_count - 15
+answer_two()
 
 # %%
 # Answer Three
+def answer_three():
+    Top15 = answer_one()
+    avgGDP = Top15[['2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015']].mean(axis=1).sort_values(ascending=False)
+    return avgGDP
+answer_three()
 
 # %%
 # Answer Four
