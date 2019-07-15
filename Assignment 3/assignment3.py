@@ -61,11 +61,9 @@ def answer_one():
     top15.set_index('Country',inplace=True)
     return top15
 
-df = answer_one()
-print(df)
-
 # %%
 # Answer Two
+def answer
 
 # %%
 # Answer Three
