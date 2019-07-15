@@ -86,6 +86,10 @@ answer_four()
 
 # %%
 # Answer Five
+def answer_five():
+    Top15 = answer_one()
+    return float(Top15[['Energy Supply per Capita']].mean())
+answer_five()
 
 # %%
 # Answer Six
