@@ -78,6 +78,12 @@ answer_three()
 
 # %%
 # Answer Four
+def answer_four():
+    AvgGDP = answer_three()
+    Top15 = answer_one()
+    return Top15.loc[AvgGDP.index[5]]['2015'] - Top15.loc[AvgGDP.index[5]]['2006']
+
+answer_four()
 
 # %%
 # Answer Five
