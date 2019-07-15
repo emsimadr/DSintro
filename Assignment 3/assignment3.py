@@ -101,21 +101,46 @@ answer_six()
 
 # %%
 # Answer Seven
+def answer_seven():
+    Top15 = answer_one()
+    Top15['Citation Ratio'] = Top15['Self-citations'] / Top15['Citations']
+    top_citation_ratio = Top15[Top15['Citation Ratio'] == Top15['Citation Ratio'].max()]
+    return (top_citation_ratio.index[0], top_citation_ratio['Citation Ratio'])
+
+answer_seven()
 
 # %%
 # Answer Eight
+def answer_eight():
+
+answer_eight()
 
 # %%
 # Answer Nine
+def answer_nine():
+
+answer_nine()
 
 # %%
 # Answer Ten
+def answer_ten():
+
+answer_ten()
 
 # %%
 # Answer Eleven
+def answer_eleven():
+
+answer_eleven()
 
 # %%
 # Answer Twelve
+def answer_twelve():
+
+answer_twelve()
 
 # %%
 # Answer Thirteen
+def answer_thirteen():
+
+answer_thirteen()
