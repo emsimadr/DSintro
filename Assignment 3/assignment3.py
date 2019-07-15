@@ -60,12 +60,13 @@ def answer_one():
     # Set index on Country
     Top15.set_index('Country',inplace=True)
     return Top15
-
+answer_one()
 # %%
 # Answer Two
 def answer_two():
-    max_row_count = np.amin([Energy.shape[0], GDP.shape[0], ScimEn.shape[0]])
-    return int(max_row_count - 15)
+    max_row_count = np.max([Energy.shape[0], GDP.shape[0], ScimEn.shape[0]])
+    join_row_count = pd.merge(pd.merge(Energy, GDP), ScimEn, on='Country', how='inner').shape[0]
+    return int(max_row_count - join_row_count)
 answer_two()
 
 # %%
@@ -106,12 +107,14 @@ def answer_seven():
     Top15['Citation Ratio'] = Top15['Self-citations'] / Top15['Citations']
     top_citation_ratio = Top15[Top15['Citation Ratio'] == Top15['Citation Ratio'].max()]
     return (top_citation_ratio.index[0], top_citation_ratio['Citation Ratio'])
-
 answer_seven()
 
 # %%
 # Answer Eight
 def answer_eight():
+    Top15 = answer_one()
+    Top15['Population'] = Top15['Energy Supply'] / Top15['Energy Supply per Capita']
+    return Top15.sort_values('Population', ascending = False).index[2]
 
 answer_eight()
 
