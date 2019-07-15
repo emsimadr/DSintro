@@ -1,11 +1,11 @@
-# Part 1: Olympics data
 # %%
+# Initialize dataframes
 import pandas as pd
 import numpy as np
 path='G:\\My Drive\\Education\\Coursera\\Introduction to Data Science with Python\\DSIntro\\Assignment 3\\'
 
-# Load energy indicators from excel
-energy = (pd.read_excel(path + 'Energy Indicators.xls',
+# Load Energy indicators from excel
+Energy = (pd.read_excel(path + 'Energy Indicators.xls',
     skiprows=18,
     skipfooter=38,
     usecols = [2,3,4,5],
@@ -13,22 +13,22 @@ energy = (pd.read_excel(path + 'Energy Indicators.xls',
     na_values = ['...']))
 
 # Convert Energy Supply to Gigajoules
-energy['Energy Supply'] = energy['Energy Supply']*1000000
+Energy['Energy Supply'] = Energy['Energy Supply']*1000000
 
 # Remove numbers from country name
-energy['Country'] = energy['Country'].str.replace('\d+', '')
+Energy['Country'] = Energy['Country'].str.replace('\d+', '')
 
 # Renaming Countris
-energy['Country'] = energy['Country'].replace({
+Energy['Country'] = Energy['Country'].replace({
     'Republic of Korea' : 'South Korea',
     'United States of America' : 'United States',
     'United Kingdom of Great Britain and Northern Ireland' : 'United Kingdom',
     'China, Hong Kong Special Administrative Region' : 'Hong Kong',
     'Bolivia (Plurinational State of)' : 'Bolivia',
-    'Venezuela (Bolivarian Republic of)' : 'Venezuela'
+    'Venezuela (Bolivarian Republic of)' : 'Venezuela',
+    'Iran (Islamic Republic of)' : 'Iran'
 })
 
-# %%
 # Load gdp data from world_bank.csv
 GDP = pd.read_csv(path + 'world_bank.csv',
     skiprows = 5,
@@ -42,7 +42,60 @@ GDP['Country'] = GDP['Country'].replace( {
     'Hong Kong SAR, China': 'Hong Kong'
 })
 
-# %%
 # Load data from the Sciamago journal
 ScimEn = pd.read_excel(path + 'scimagojr-3.xlsx')
-print(ScimEn)
+
+# %%
+# Answer One
+def answer_one():
+    # Sort by rank and return top 15 countries
+    tmp_scim = ScimEn.sort_values('Rank').head(15)
+
+    # Reduce GDP years to last 10
+    tmp_GDP = GDP[['Country', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015']]
+
+    # Intersections between all three data frames
+    top15 = pd.merge(pd.merge(tmp_scim, Energy, left_on='Country', right_on='Country',  how='inner'),
+        tmp_GDP, left_on='Country', right_on='Country', how='inner')
+    # Set index on Country
+    top15.set_index('Country',inplace=True)
+    return top15
+
+df = answer_one()
+print(df)
+
+# %%
+# Answer Two
+
+# %%
+# Answer Three
+
+# %%
+# Answer Four
+
+# %%
+# Answer Five
+
+# %%
+# Answer Six
+
+# %%
+# Answer Seven
+
+# %%
+# Answer Eight
+
+# %%
+# Answer Nine
+
+# %%
+# Answer Ten
+
+# %%
+# Answer Eleven
+
+# %%
+# Answer Twelve
+
+# %%
+# Answer Thirteen
