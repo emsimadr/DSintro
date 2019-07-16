@@ -167,13 +167,32 @@ def answer_eleven():
         'std' : np.std
     })
     return df
-
 answer_eleven()
 
 # %%
 # Answer Twelve
 def answer_twelve():
+    Top15 = answer_one()
+    ContinentDict  = {'China':'Asia',
+                  'United States':'North America',
+                  'Japan':'Asia',
+                  'United Kingdom':'Europe',
+                  'Russian Federation':'Europe',
+                  'Canada':'North America',
+                  'Germany':'Europe',
+                  'India':'Asia',
+                  'France':'Europe',
+                  'South Korea':'Asia',
+                  'Italy':'Europe',
+                  'Spain':'Europe',
+                  'Iran':'Asia',
+                  'Australia':'Australia',
+                  'Brazil':'South America'}
 
+    Top15['Continent'] = [ContinentDict[country] for country in Top15.index]
+    Top15['Bin'] = pd.cut(Top15['% Renewable'], 5)
+
+    return Top15.groupby(['Continent', 'Bin']).size()
 answer_twelve()
 
 # %%
