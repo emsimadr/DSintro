@@ -131,6 +131,10 @@ answer_nine()
 # %%
 # Answer Ten
 def answer_ten():
+    Top15 = answer_one()
+    median = Top15['% Renewable'].median()
+    Top15['Above Mean'] = [1 if x >= median else 0 for x in Top15['% Renewable']]
+    return Top15['Above Mean']
 
 answer_ten()
 
