@@ -13,15 +13,15 @@ def get_list_of_university_towns():
         x = f.readlines()
         x = [word[:-1] for word in x]
 
-    pairs = []
+    state_region = []
     cur_state = ''
     for place in x:
         if place[-6:] == '[edit]':
             cur_state = place[:-6]
         else:
             place = re.sub(r"\s\(.+",'',place)
-            pairs.append([cur_state,place])
-    print(pairs)
-    return None
+            state_region.append([cur_state,place])
+
+    return pd.DataFrame(state_region, columns=['State','RegionName'])
 
 get_list_of_university_towns()
