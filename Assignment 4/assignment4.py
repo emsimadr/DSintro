@@ -11,14 +11,17 @@ states = {'OH': 'Ohio', 'KY': 'Kentucky', 'AS': 'American Samoa', 'NV': 'Nevada'
 def get_list_of_university_towns():
     with open(path + 'university_towns.txt', 'r') as f:
         x = f.readlines()
-        x = [word[:-1] for word in x]
 
     state_region = []
     cur_state = ''
     for place in x:
+        # remove \n
+        place = place[:-1]
+        # check to see if the place is a state
         if place[-6:] == '[edit]':
             cur_state = place[:-6]
         else:
+            # if the place has "(place,...)" in their name, remove it
             place = re.sub(r"\s\(.+",'',place)
             state_region.append([cur_state,place])
 
